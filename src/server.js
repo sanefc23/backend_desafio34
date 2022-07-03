@@ -7,7 +7,6 @@ const {
 const routerAPI = express.Router();
 const PATH = require('path')
 const app = express();
-const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const denv = require('dotenv');
 const dotenv = denv.config();
@@ -19,7 +18,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const compression = require('compression');
 const args = require('minimist')(process.argv);
-const PORT = args.port || 8080;
+const PORT = process.env.PORT || args[2];
 const log4js = require('log4js');
 const {
     fork
@@ -85,27 +84,11 @@ app.use(cookieParser());
 app.use(flash());
 app.use(compression());
 
-if (args.runMode == 'CLUSTER') {
-    if (cluster.isPrimary) {
-        console.log('CPUs: ', numCPUs);
-        console.log(`Master PID: ${process.pid} is running`);
-        for (let i = 0; i < numCPUs; i++) {
-            cluster.fork();
-        }
-        cluster.on('exit', (worker, code, signal) => {
-            console.log(`Worker ${worker.process.pid} died`)
-            cluster.fork();
-        });
-    } else {
-        server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
-        server.on("error", (error) => console.log("Server Error\n\t", error));
-        console.log(`Worker ${process.pid} started`)
-    }
-} else {
-    server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
-    server.on("error", (error) => console.log("Server Error\n\t", error));
-    console.log(`Worker ${process.pid} started`)
-}
+const server = require("http").createServer(app);
+
+server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
+server.on("error", (error) => console.log("Server Error\n\t", error));
+console.log(`Worker ${process.pid} started`)
 
 // --- Session ---
 const sessionOptions = {

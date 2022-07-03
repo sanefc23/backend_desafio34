@@ -1,0 +1,38 @@
+<div class="container">
+
+    {{#if userName}}
+    <div class="row" style="flex:auto; justify-content:center; align-items:center">
+        <div class="col-4">
+            <h2>¡Bienvenido <strong>{{userName}}</strong>!</h2>
+        </div>
+        <div class="col-4">
+            <form action="/user/logout" name="logout" method="GET">
+                <button type="submit" class="btn btn-danger" style="margin:1.5em; ">
+                    Logout</button>
+            </form>
+        </div>
+    </div>
+    {{else}}
+    <div class="row" style="justify-content:center; align-items:center">
+        <div class="col-4">
+            <form action="/user/login" method="POST" name="login">
+                <div class="form-group" style="padding:1.5em;">
+                    <input type="text" class="form-control" id="userName" name="userName" aria-describedby="userName"
+                        placeholder="Usuario">
+                </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group" style="padding:1.5em;">
+                <input type="password" class="form-control" id="password" name="password" aria-describedby="password"
+                    placeholder="Password">
+            </div>
+        </div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary" style="margin:1.5em;">Login</button>
+            <a href="/user/register"><button type="button" class="btn btn-warning"
+                    style="margin:1.5em;">Registrarme</button></a>
+        </div>
+        </form>
+    </div>
+    {{/if}}
+</div>

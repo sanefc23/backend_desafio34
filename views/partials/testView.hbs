@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="col-12" style="text-align: center; font-size:2rem; padding: 0.5em">
+        <h2 id="title">Test View</h2>
+    </div>
+
+    {{#if fakeProds}}
+
+    <ul class="product-list">
+        {{#each fakeProds}}
+        <div class="row" style="padding: 1em;border-color:white;border-style:solid;border-width: 1px 0px">
+            <div class="row product">
+                <div class="col-2">{{title}}</div>
+                <div class="col-2">${{price}}</div>
+                <div class="col-2">
+                    <img src="{{thumbnail}}" alt="" width="60" height="60">
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </ul>
+
+    {{else}}
+    <h2>No hay productos</h2>
+    {{/if}}
+
+</div>

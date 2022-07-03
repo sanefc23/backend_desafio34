@@ -1,0 +1,56 @@
+{
+  "name": "clase30",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js --runMode=FORK --port=8080",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "forever start -w src/server.js --runMode=CLUSTER --port=8080",
+    "pm2": "pm2 start ecosystem.config.js",
+    "artillery:fork": "artillery run artillery.yml",
+    "artillery:cluster": "artillery quick --count 50 -n 40 http://localhost:8080/randoms/10000",
+    "start:profilling": "node --prof --logfile=foo.log --no-logfile-per-isolate src/server.js",
+    "start:inspect": "node --inspect src/server.js",
+    "autocannon": "autocannon -c 100 -d 20 'http://localhost:8080/randoms/1000"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "artillery": "^2.0.0-19",
+    "bcrypt": "^5.0.1",
+    "child_process": "^1.0.2",
+    "cluster": "^0.7.7",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.5",
+    "express-session": "^1.17.3",
+    "forever": "^4.0.3",
+    "http-errors": "^2.0.0",
+    "knex": "^2.0.0",
+    "log4js": "^6.5.2",
+    "minimist": "^1.2.6",
+    "mongoose": "^6.3.4",
+    "mongoose-type-email": "^1.1.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
+    "normalizr": "^3.6.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "pm2": "^5.2.0",
+    "socket.io": "^4.4.1",
+    "sqlite3": "^5.0.6"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.3.1"
+  }
+}

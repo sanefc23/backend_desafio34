@@ -1,0 +1,105 @@
+Statistical profiling result from foo.log, (8068 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   7149   88.6%          C:\Windows\SYSTEM32\ntdll.dll
+    902   11.2%          C:\Program Files\nodejs\node.exe
+      5    0.1%          C:\Windows\System32\KERNELBASE.dll
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      1    0.0%    8.3%  RegExp: (?:^|\/)\.?\.$
+      1    0.0%    8.3%  LazyCompile: *resolve node:path:158:10
+      1    0.0%    8.3%  LazyCompile: *nextTick node:internal/process/task_queues:104:18
+      1    0.0%    8.3%  LazyCompile: *isFileType node:fs:205:20
+      1    0.0%    8.3%  LazyCompile: *formatRaw node:internal/util/inspect:820:19
+      1    0.0%    8.3%  LazyCompile: *_addListener node:events:555:22
+      1    0.0%    8.3%  LazyCompile: *<anonymous> node:child_process:627:7
+      1    0.0%    8.3%  Function: ^update D:\CoderHouse Backend\Clase30\node_modules\mongodb\lib\sdam\topology_description.js:139:11
+      1    0.0%    8.3%  Function: ^nextTick node:internal/process/task_queues:104:18
+      1    0.0%    8.3%  Function: ^getValidStdio node:internal/child_process:973:23
+      1    0.0%    8.3%  Function: ^Long.not D:\CoderHouse Backend\Clase30\node_modules\bson\lib\long.js:623:35
+      1    0.0%    8.3%  Function: ^Long.equals D:\CoderHouse Backend\Clase30\node_modules\bson\lib\long.js:428:38
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+     12    0.1%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+     11    0.1%   91.7%  GC
+   8056   99.9%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   7149   88.6%  C:\Windows\SYSTEM32\ntdll.dll
+    195    2.7%    LazyCompile: *ChildProcess.spawn node:internal/child_process:347:40
+    195  100.0%      Function: ^spawn node:child_process:692:15
+    195  100.0%        Function: ^fork node:child_process:114:14
+    195  100.0%          Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+    195  100.0%            Function: ^handle D:\CoderHouse Backend\Clase30\node_modules\express\lib\router\layer.js:86:49
+
+    902   11.2%  C:\Program Files\nodejs\node.exe
+    821   91.0%    C:\Program Files\nodejs\node.exe
+    407   49.6%      Function: ^handleWriteReq node:internal/stream_base_commons:45:24
+    407  100.0%        Function: ^writeGeneric node:internal/stream_base_commons:147:22
+    407  100.0%          Function: ^Socket._writeGeneric node:net:791:42
+    407  100.0%            Function: ^Socket._write node:net:828:35
+    196   23.9%      Function: ^ChildProcess.spawn node:internal/child_process:347:40
+    194   99.0%        Function: ^spawn node:child_process:692:15
+    194  100.0%          Function: ^fork node:child_process:114:14
+    194  100.0%            Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+      2    1.0%        LazyCompile: ~spawn node:child_process:692:15
+      1   50.0%          LazyCompile: ~fork node:child_process:114:14
+      1  100.0%            Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+      1   50.0%          Function: ^fork node:child_process:114:14
+      1  100.0%            Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+     32    3.9%      Function: ^compileFunction node:vm:308:25
+     32  100.0%        Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+     29   90.6%          Function: ^Module._compile node:internal/modules/cjs/loader:1059:37
+     29  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      3    9.4%          LazyCompile: *Module._compile node:internal/modules/cjs/loader:1059:37
+      3  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+     28    3.4%      LazyCompile: *normalizeSpawnArguments node:child_process:504:33
+     28  100.0%        Function: ^spawn node:child_process:692:15
+     28  100.0%          Function: ^fork node:child_process:114:14
+     28  100.0%            Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+     13    1.6%      Function: ^normalizeSpawnArguments node:child_process:504:33
+     13  100.0%        Function: ^spawn node:child_process:692:15
+     13  100.0%          Function: ^fork node:child_process:114:14
+     13  100.0%            Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+     10    1.2%      C:\Program Files\nodejs\node.exe
+      3   30.0%        Function: ^deprecate node:internal/util:96:19
+      3  100.0%          Function: ^setupChannel node:internal/child_process:571:22
+      3  100.0%            Function: ^ChildProcess.spawn node:internal/child_process:347:40
+      2   20.0%        Function: ^prepareStackTrace node:internal/errors:91:27
+      2  100.0%          C:\Program Files\nodejs\node.exe
+      2  100.0%            LazyCompile: ~checkError node:internal/streams/destroy:16:20
+      1   10.0%        LazyCompile: ~get D:\CoderHouse Backend\Clase30\node_modules\@faker-js\faker\dist\cjs\locales\zh_TW\address\index.js:1:355
+      1  100.0%          Function: ~<anonymous> D:\CoderHouse Backend\Clase30\node_modules\@faker-js\faker\dist\cjs\locales\zh_TW\address\index.js:1:1
+      1  100.0%            LazyCompile: *Module._compile node:internal/modules/cjs/loader:1059:37
+      1   10.0%        LazyCompile: *formatRaw node:internal/util/inspect:820:19
+      1  100.0%          Function: ^formatValue node:internal/util/inspect:745:21
+      1  100.0%            LazyCompile: *formatProperty node:internal/util/inspect:1810:24
+      1   10.0%        LazyCompile: *Module._load node:internal/modules/cjs/loader:757:24
+      1  100.0%          Function: ^Module.require node:internal/modules/cjs/loader:997:36
+      1  100.0%            Function: ^require node:internal/modules/cjs/helpers:101:31
+      1   10.0%        Function: ^readPackage node:internal/modules/cjs/loader:290:21
+      1  100.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:321:26
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1114:37
+      1   10.0%        Function: ^pipe D:\CoderHouse Backend\Clase30\node_modules\send\index.js:510:43
+      1  100.0%          Function: ^serveStatic D:\CoderHouse Backend\Clase30\node_modules\serve-static\index.js:72:31
+      1  100.0%            Function: ^handle D:\CoderHouse Backend\Clase30\node_modules\express\lib\router\layer.js:86:49
+      9    1.1%      LazyCompile: *ChildProcess.spawn node:internal/child_process:347:40
+      9  100.0%        Function: ^spawn node:child_process:692:15
+      9  100.0%          Function: ^fork node:child_process:114:14
+      9  100.0%            Function: ^<anonymous> D:\CoderHouse Backend\Clase30\src\server.js:155:27
+

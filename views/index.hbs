@@ -1,0 +1,114 @@
+{{> header}}
+
+{{#if updateForm}}
+
+{{> updateForm}}
+
+{{else if testView}}
+
+{{> testView}}
+
+{{else if failedLogin}}
+
+{{> failedLogin}}
+
+{{else if failedRegister}}
+
+{{> failedRegister}}
+
+{{else if registerView}}
+
+{{> registerView}}
+
+{{else}}
+
+{{> userSession}}
+
+<div class="container">
+    <div class="container">
+        <div class="col-12" style="text-align: center; font-size:2rem; padding: 0.5em">
+            <h2 id="viewTitle"></h2>
+        </div>
+
+        <div class="row" style="padding: 1em;border-color:white;border-style:solid;border-width: 1px 0px">
+            <!-- Here goes the data sent from server -->
+            <div id="productCatalog"></div>
+        </div>
+
+        <div class="formCard">
+            <h2>Agregar producto:</h2>
+            <form action="/productos/agregar" method="POST" name="Products" onsubmit="return createProd(this)">
+                <div class="form-group" style="padding:1.5em;">
+                    <label for="title">Título</label>
+                    <input type="text" class="form-control" id="title" name="title" aria-describedby="title"
+                        placeholder="Ingrese titulo del producto">
+                </div>
+                <div class="form-group" style="padding:1.5em;">
+                    <label for="price">Precio</label>
+                    <input type="number" class="form-control" id="price" name="price"
+                        placeholder="Ingrese precio del producto">
+                </div>
+                <div class="form-group" style="padding:1.5em;">
+                    <label for="thumbnail">URL de la imagen</label>
+                    <input type="url" class="form-control" id="thumbnail" name="thumbnail"
+                        placeholder="Ingrese url de la imagen">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin:1.5em;">
+                    Agregar producto</button>
+            </form>
+        </div>
+
+        <div class="formCard">
+            <h2>Mensajes</h2>
+            <div id="messages"></div>
+            <form action="" name="Messages" onsubmit="return sendMsg(this)">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group" style="padding:1.5em;">
+                            <label for="title">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="email"
+                                placeholder="Email">
+                        </div>
+                        <div class="form-group" style="padding:1.5em;">
+                            <label for="title">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" aria-describedby="name"
+                                placeholder="Nombre">
+                        </div>
+                        <div class="form-group" style="padding:1.5em;">
+                            <label for="title">Apellido</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName"
+                                aria-describedby="lastName" placeholder="Apellido">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group" style="padding:1.5em;">
+                            <label for="title">Edad</label>
+                            <input type="number" class="form-control" id="age" name="age" aria-describedby="age"
+                                placeholder="Edad">
+                        </div>
+                        <div class="form-group" style="padding:1.5em;">
+                            <label for="title">Alias</label>
+                            <input type="text" class="form-control" id="alias" name="alias" aria-describedby="alias"
+                                placeholder="Alias">
+                        </div>
+                        <div class="form-group" style="padding:1.5em;">
+                            <label for="title">Avatar</label>
+                            <input type="url" class="form-control" id="avatar" name="avatar" aria-describedby="avatar"
+                                placeholder="Avatar">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="padding:1.5em;">
+                    <label for="msg">Mensaje</label>
+                    <input type="text" class="form-control" id="text" name="text" placeholder="Ingrese mensaje">
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin:1.5em;">
+                    Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{/if}}
+
+{{> footer}}

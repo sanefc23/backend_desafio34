@@ -7,6 +7,7 @@ const {
 const routerAPI = express.Router();
 const PATH = require('path')
 const app = express();
+const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const denv = require('dotenv');
 const dotenv = denv.config();
@@ -85,8 +86,6 @@ app.use(cookieParser());
 app.use(flash());
 app.use(compression());
 app.use(cors())
-
-const server = require("http").createServer(app);
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
 server.on("error", (error) => console.log("Server Error\n\t", error));

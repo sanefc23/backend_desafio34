@@ -25,6 +25,7 @@ const {
 } = require("child_process");
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+const cors = require('cors')
 
 // --- MongoDB Models ---
 const Message = require("./db/Message");
@@ -83,6 +84,7 @@ app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(flash());
 app.use(compression());
+app.use(cors())
 
 const server = require("http").createServer(app);
 

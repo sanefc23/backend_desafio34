@@ -91,7 +91,7 @@ console.log(`Worker ${process.pid} started`)
 // --- Session ---
 const sessionOptions = {
     store: MongoStore.create({
-        mongoUrl: "mongodb+srv://sanefc_test:CODERHOUSE@cluster0.zdtqg.mongodb.net/ecommerce_test?retryWrites=true&w=majority"
+        mongoUrl: process.env.MONGO_ATLAS_URL
     }),
     secret: 's3cr3t0',
     resave: true,

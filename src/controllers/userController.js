@@ -2,6 +2,24 @@ const User = require('../db/User')
 const bcrypt = require("bcrypt");
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const log4js = require('log4js');
+
+log4js.configure({
+    appenders:{
+        warnings: {type: "file", filename: "warn.log", level: 'warn'},
+        errors: {type: "file", filename: "error.log", level: 'error'},
+        all:{type: "console"},
+    },
+    categories:{
+        file1: {appenders:["warnings"], level: "warn"},
+        file2: {appenders:["errors"], level: "error"},
+        default:{appenders:["all"], level: "trace"}
+    }
+});
+
+const logger = log4js.getLogger();
+const loggerWarn = log4js.getLogger('file1');
+const loggerErr = log4js.getLogger('file2');
 
 passport.serializeUser((user, done) => {
     done(null, user.email);

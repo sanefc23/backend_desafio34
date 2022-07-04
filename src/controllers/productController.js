@@ -8,21 +8,21 @@ const log4js = require('log4js');
 // //Función generadora de productos.
 // faker.locale = 'es'
 
-function genProducts(cant) {
-    const generatedProducts = [];
-    let r = 0;
+// function genProducts(cant) {
+//     const generatedProducts = [];
+//     let r = 0;
 
-    for (let i = 0; i < cant; i++) {
-        generatedProducts.push({
-            id: faker.datatype.uuid(),
-            title: faker.commerce.product(),
-            thumbnail: `${faker.image.technics()}?random=${r++}`,
-            price: faker.commerce.price(),
-        })
-    }
+//     for (let i = 0; i < cant; i++) {
+//         generatedProducts.push({
+//             id: faker.datatype.uuid(),
+//             title: faker.commerce.product(),
+//             thumbnail: `${faker.image.technics()}?random=${r++}`,
+//             price: faker.commerce.price(),
+//         })
+//     }
 
-    return generatedProducts;
-}
+//     return generatedProducts;
+// }
 
 log4js.configure({
     appenders:{

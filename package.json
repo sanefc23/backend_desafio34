@@ -34,6 +34,7 @@
     "express": "^4.17.3",
     "express-handlebars": "^6.0.5",
     "express-session": "^1.17.3",
+    "faker-js": "^1.0.0",
     "forever": "^4.0.3",
     "http-errors": "^2.0.0",
     "knex": "^2.0.0",

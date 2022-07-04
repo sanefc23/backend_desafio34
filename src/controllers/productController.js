@@ -1,12 +1,12 @@
 const Product = require('../db/Product');
 const Message = require('../db/Message');
-const {
-    faker
-} = require('@faker-js/faker');
+// const {
+//     faker
+// } = require('@faker-js/faker');
 const log4js = require('log4js');
 
-//Función generadora de productos.
-faker.locale = 'es'
+// //Función generadora de productos.
+// faker.locale = 'es'
 
 function genProducts(cant) {
     const generatedProducts = [];
@@ -68,7 +68,7 @@ const productController = {
     },
     testView: (req, res) => {
         logger.info(req.route);
-        const fakeProds = req.params.cant == undefined ? genProducts(5) : genProducts(req.params.cant);
+        const fakeProds = []
 
         if (fakeProds.length > 0) {
             return res.render('index', {

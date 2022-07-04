@@ -31,9 +31,6 @@ const cors = require('cors')
 // --- MongoDB Models ---
 const Message = require("./db/Message");
 const Product = require("./db/Product");
-const {
-    faker
-} = require('@faker-js/faker');
 
 log4js.configure({
     appenders: {

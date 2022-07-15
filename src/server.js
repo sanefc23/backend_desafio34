@@ -9,8 +9,7 @@ const PATH = require('path')
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const denv = require('dotenv');
-const dotenv = denv.config();
+const config = require('../src/config/config')
 const productRouter = require("./routers/productRouter");
 const userRouter = require("./routers/userRouter");
 const mongoose = require("mongoose");
@@ -20,43 +19,17 @@ const flash = require('connect-flash');
 const compression = require('compression');
 const args = require('minimist')(process.argv);
 const PORT = process.env.PORT || args[2];
-const log4js = require('log4js');
+const logger = require('../src/services/logger');
+
 const {
     fork
 } = require("child_process");
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
-const cors = require('cors')
 
 // --- MongoDB Models ---
 const Message = require("./db/Message");
 const Product = require("./db/Product");
-
-log4js.configure({
-    appenders: {
-        warnings: {
-            type: "file",
-            filename: "warn.log",
-            level: 'warn'
-        },
-        all: {
-            type: "console"
-        },
-    },
-    categories: {
-        file1: {
-            appenders: ["warnings"],
-            level: "warn"
-        },
-        default: {
-            appenders: ["all"],
-            level: "trace"
-        }
-    }
-});
-
-const logger = log4js.getLogger();
-const loggerWarn = log4js.getLogger('file1');
 
 // --- Normalizr ---
 const normalizr = require('normalizr');
@@ -82,7 +55,6 @@ app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(flash());
 app.use(compression());
-app.use(cors())
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
 server.on("error", (error) => console.log("Server Error\n\t", error));
@@ -91,7 +63,7 @@ console.log(`Worker ${process.pid} started`)
 // --- Session ---
 const sessionOptions = {
     store: MongoStore.create({
-        mongoUrl: process.env.MONGO_ATLAS_URL
+        mongoUrl: config.MONGO_ATLAS_URL
     }),
     secret: 's3cr3t0',
     resave: true,
@@ -142,7 +114,7 @@ app.get('/randoms/:num?', (req, res) => {
 })
 
 app.use(function (req, res) {
-    loggerWarn.warn('404 - NOT FOUND')
+    logger.warn('404 - NOT FOUND')
     res.sendStatus(404)
 });
 
@@ -164,13 +136,13 @@ app.set("view engine", "hbs");
 connect()
 
 function connect() {
-    mongoose.connect(process.env.MONGO_ATLAS_URL, {
+    mongoose.connect(config.MONGO_ATLAS_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             serverSelectionTimeoutMS: 1000
         })
-        .then(() => console.log('Conectado a la base de datos...'))
-        .catch(error => console.log('Error al conectarse a la base de datos', error));
+        .then(() => logger.info('Conectado a la base de datos...'))
+        .catch(error => logger.info('Error al conectarse a la base de datos', error));
 }
 
 io.on('connection', (socket) => {
@@ -196,15 +168,15 @@ io.on('connection', (socket) => {
                     };
                 })
                 const normalizedMsgs = normalize(parsedMessages, [text]);
-                console.log('Longitud antes de normalizar:', JSON.stringify(messages).length);
-                console.log('Longitud después de normalizar:', JSON.stringify(normalizedMsgs).length);
+                logger.info('Longitud antes de normalizar:', JSON.stringify(messages).length);
+                logger.info('Longitud después de normalizar:', JSON.stringify(normalizedMsgs).length);
                 socket.emit('messages', {
                     messages: messages,
                     normalizedMsgs: normalizedMsgs,
                 });
             })
             .catch(e => {
-                console.log('Error getting messages: ', e);
+                logger.error('Error getting messages: ', e);
             });
     }
 
@@ -220,7 +192,7 @@ io.on('connection', (socket) => {
                 });
             })
             .catch(e => {
-                console.log('Error getting products: ', e);
+                logger.error('Error getting products: ', e);
             });
     }
 
@@ -232,12 +204,12 @@ io.on('connection', (socket) => {
     socket.on('newMsg', newMsg => {
         Product.create(newMsg)
             .then(() => {
-                console.log('Mensaje insertado');
+                logger.info('Mensaje insertado');
                 selectAllMessages();
                 return false;
             })
             .catch(e => {
-                console.log('Error en Insert message: ', e);
+                logger.error('Error en Insert message: ', e);
             });
     });
 });

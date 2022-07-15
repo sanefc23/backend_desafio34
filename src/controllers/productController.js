@@ -1,45 +1,6 @@
 const Product = require('../db/Product');
 const Message = require('../db/Message');
-// const {
-//     faker
-// } = require('@faker-js/faker');
-const log4js = require('log4js');
-
-// //Función generadora de productos.
-// faker.locale = 'es'
-
-// function genProducts(cant) {
-//     const generatedProducts = [];
-//     let r = 0;
-
-//     for (let i = 0; i < cant; i++) {
-//         generatedProducts.push({
-//             id: faker.datatype.uuid(),
-//             title: faker.commerce.product(),
-//             thumbnail: `${faker.image.technics()}?random=${r++}`,
-//             price: faker.commerce.price(),
-//         })
-//     }
-
-//     return generatedProducts;
-// }
-
-log4js.configure({
-    appenders:{
-        warnings: {type: "file", filename: "warn.log", level: 'warn'},
-        errors: {type: "file", filename: "error.log", level: 'error'},
-        all:{type: "console"},
-    },
-    categories:{
-        file1: {appenders:["warnings"], level: "warn"},
-        file2: {appenders:["errors"], level: "error"},
-        default:{appenders:["all"], level: "trace"}
-    }
-});
-
-const logger = log4js.getLogger();
-const loggerWarn = log4js.getLogger('file1');
-const loggerErr = log4js.getLogger('file2');
+const logger = require('../services/logger');
 
 const productController = {
     listProducts: (req, res) => {
@@ -111,7 +72,7 @@ const productController = {
                 })
             })
             .catch(e => {
-                loggerErr.error('Error getting product: ', e);
+                logger.error('Error getting product: ', e);
             });
     },
     editProduct: (req, res) => {
@@ -121,11 +82,11 @@ const productController = {
 
         Product.findByIdAndUpdate(id, req.body)
             .then(prod => {
-                loggerWarn.warn('producto actualizado: ', prod);
+                logger.warn('producto actualizado: ', prod);
                 res.redirect('/productos');
             })
             .catch(e => {
-                loggerErr.error('Error en Update producto: ', e);
+                logger.error('Error en Update producto: ', e);
             });
     },
     deleteProduct: (req, res) => {
@@ -133,11 +94,11 @@ const productController = {
         let id = req.params.idprod;
         Product.findByIdAndDelete(id)
             .then(prod => {
-                loggerWarn.warn('producto eliminado: ', prod);
+                logger.warn('producto eliminado: ', prod);
                 res.redirect('/productos');
             })
             .catch(e => {
-                loggerErr.error('Error en Delete producto: ', e);
+                logger.error('Error en Delete producto: ', e);
             });
     }
 }

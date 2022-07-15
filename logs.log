@@ -1,0 +1,85 @@
+[2022-07-14T21:58:31.064] [INFO] file1 - Conectado a la base de datos...
+[2022-07-14T21:58:38.452] [INFO] file1 - Conectado a la base de datos...
+[2022-07-14T22:03:37.366] [INFO] file1 - Productos:  Session {
+  cookie: {
+    path: '/',
+    _expires: 2022-07-15T01:04:35.681Z,
+    originalMaxAge: 60000,
+    httpOnly: true
+  }
+}
+[2022-07-14T22:03:37.366] [INFO] file1 - Route {
+  path: '/',
+  stack: [
+    Layer {
+      handle: [Function: listProducts],
+      name: 'listProducts',
+      params: undefined,
+      path: undefined,
+      keys: [],
+      regexp: /^\/?$/i,
+      method: 'get'
+    }
+  ],
+  methods: { get: true }
+}
+[2022-07-14T22:03:39.175] [INFO] file1 - Longitud antes de normalizar: 2137
+[2022-07-14T22:03:39.175] [INFO] file1 - Longitud después de normalizar: 1825
+[2022-07-14T22:03:39.263] [WARN] file1 - 404 - NOT FOUND
+[2022-07-14T22:03:44.039] [INFO] file1 - Route {
+  path: '/register',
+  stack: [
+    Layer {
+      handle: [Function: registerView],
+      name: 'registerView',
+      params: undefined,
+      path: undefined,
+      keys: [],
+      regexp: /^\/?$/i,
+      method: 'get'
+    }
+  ],
+  methods: { get: true }
+}
+[2022-07-14T22:03:44.648] [WARN] file1 - 404 - NOT FOUND
+[2022-07-14T22:04:08.432] [INFO] file1 - Route {
+  path: '/register',
+  stack: [
+    Layer {
+      handle: [Function: authenticate],
+      name: 'authenticate',
+      params: undefined,
+      path: undefined,
+      keys: [],
+      regexp: /^\/?$/i,
+      method: 'post'
+    }
+  ],
+  methods: { post: true }
+}
+[2022-07-14T22:04:09.346] [INFO] file1 - Productos:  Session {
+  cookie: {
+    path: '/',
+    _expires: 2022-07-15T01:05:09.110Z,
+    originalMaxAge: 60000,
+    httpOnly: true
+  },
+  passport: { user: 'sanef22@mail.com' }
+}
+[2022-07-14T22:04:09.346] [INFO] file1 - Route {
+  path: '/',
+  stack: [
+    Layer {
+      handle: [Function: listProducts],
+      name: 'listProducts',
+      params: undefined,
+      path: undefined,
+      keys: [],
+      regexp: /^\/?$/i,
+      method: 'get'
+    }
+  ],
+  methods: { get: true }
+}
+[2022-07-14T22:04:11.000] [INFO] file1 - Longitud antes de normalizar: 2137
+[2022-07-14T22:04:11.000] [INFO] file1 - Longitud después de normalizar: 1825
